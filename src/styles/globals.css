@@ -1,7 +1,7 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
-@import './shiki.css';
-@import './typography.css';
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./shiki.css";
+@import "./typography.css";
 
 @theme {
   --color-background: var(--background);
@@ -39,7 +39,10 @@
   --height-footer: 64px;
   --height-header: 60px;
   --height-page: calc(100vh - var(--height-footer));
-  --height-content: calc(var(--height-page) - var(--height-header) - calc(var(--spacing) * 40 - var(--height-header)));
+  --height-content: calc(
+    var(--height-page) - var(--height-header) -
+      calc(var(--spacing) * 40 - var(--height-header))
+  );
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);

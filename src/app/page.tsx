@@ -1,8 +1,8 @@
-import { Suspense } from 'react'
+import { Suspense } from "react";
 
-import Posts from '@/components/posts'
-import PostsPlaceholder from '@/components/posts-placeholder'
-import { range } from '@/utils/range'
+import Posts from "@/components/posts";
+import PostsPlaceholder from "@/components/posts-placeholder";
+import { range } from "@/utils/range";
 
 const HomePage = () => {
   return (
@@ -13,7 +13,7 @@ const HomePage = () => {
     >
       <Posts />
     </Suspense>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

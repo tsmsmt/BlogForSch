@@ -1,7 +1,11 @@
 @plugin '@tailwindcss/typography';
 
 .prose {
-  --tw-prose-body: color-mix(in oklab, var(--color-foreground) 90%, transparent);
+  --tw-prose-body: color-mix(
+    in oklab,
+    var(--color-foreground) 90%,
+    transparent
+  );
   --tw-prose-headings: var(--color-foreground);
   --tw-prose-lead: var(--color-foreground);
   --tw-prose-links: var(--color-foreground);
@@ -20,11 +24,11 @@
     max-width: none;
   }
 
-  :where(img):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+  :where(img):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     margin: 0 auto;
   }
 
-  :where(code):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+  :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     padding: 2px 4px;
     font-size: 13px;
     border-radius: 6px;
@@ -37,7 +41,7 @@
     }
   }
 
-  :where(blockquote):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+  :where(blockquote):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     font-style: normal;
 
     p {
@@ -48,12 +52,16 @@
     }
   }
 
-  :where(video):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+  :where(video):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     margin-top: 16px;
     margin-bottom: 16px;
   }
 
-  :is(:where(h1, h2, h3, h4, h5, h6, th):not(:where([class~='not-prose'], [class~='not-prose'] *))) {
+  :is(
+    :where(h1, h2, h3, h4, h5, h6, th):not(
+      :where([class~="not-prose"], [class~="not-prose"] *)
+    )
+  ) {
     & a {
       text-decoration: none;
       font-weight: inherit;

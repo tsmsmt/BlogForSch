@@ -1,30 +1,30 @@
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
-import { redirect } from 'next/navigation'
+import { redirect } from "next/navigation";
 
-import { getCurrentUser } from '@/lib/auth'
+import { getCurrentUser } from "@/lib/auth";
 
-import LoginButton from './login-button'
+import LoginButton from "./login-button";
 
 export const metadata: Metadata = {
-  title: 'Log in',
-  description: 'Log in to TSMSMT'
-}
+  title: "Log in",
+  description: "Log in to TSMSMT",
+};
 
 const LoginPage = async () => {
-  const user = await getCurrentUser()
+  const user = await getCurrentUser();
 
   if (user) {
-    redirect('/')
+    redirect("/");
   }
 
   return (
-    <div className='flex min-h-content w-full flex-col items-center justify-center p-4'>
-      <div className='text-2xl font-semibold'>Log in</div>
-      <p className='text-muted-foreground'>to continue to TSMSMT</p>
+    <div className="flex min-h-content w-full flex-col items-center justify-center p-4">
+      <div className="text-2xl font-semibold">Log in</div>
+      <p className="text-muted-foreground">to continue to TSMSMT</p>
       <LoginButton />
     </div>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;

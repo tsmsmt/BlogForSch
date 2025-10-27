@@ -1,12 +1,12 @@
-'use server'
+"use server";
 
-import { revalidatePath } from 'next/cache'
+import { revalidatePath } from "next/cache";
 
-import { db } from '@/db'
-import { posts } from '@/db/schema'
-import { authenticatedActionClient } from '@/lib/safe-action'
+import { db } from "@/db";
+import { posts } from "@/db/schema";
+import { authenticatedActionClient } from "@/lib/safe-action";
 
-import { createPostSchema } from './schema'
+import { createPostSchema } from "./schema";
 
 export const createPostAction = authenticatedActionClient
   .inputSchema(createPostSchema)
@@ -15,15 +15,15 @@ export const createPostAction = authenticatedActionClient
       .insert(posts)
       .values({
         title,
-        authorId: user.id
+        authorId: user.id,
       })
       .returning({
-        id: posts.id
-      })
+        id: posts.id,
+      });
 
-    revalidatePath('/me/posts')
+    revalidatePath("/me/posts");
 
     return {
-      postId: post?.id
-    }
-  })
+      postId: post?.id,
+    };
+  });

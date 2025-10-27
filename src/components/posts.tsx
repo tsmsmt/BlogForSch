@@ -1,13 +1,13 @@
-import PostCard from '@/components/post-card'
-import { getCurrentUser } from '@/lib/auth'
-import { getPosts } from '@/queries/get-posts'
+import PostCard from "@/components/post-card";
+import { getCurrentUser } from "@/lib/auth";
+import { getPosts } from "@/queries/get-posts";
 
 const Posts = async () => {
-  const user = await getCurrentUser()
-  const { posts } = await getPosts()
+  const user = await getCurrentUser();
+  const { posts } = await getPosts();
 
   if (posts.length === 0) {
-    return <div className='text-center'>No posts yet.</div>
+    return <div className="text-center">No posts yet.</div>;
   }
 
   return (
@@ -16,7 +16,7 @@ const Posts = async () => {
         <PostCard key={post.id} post={post} user={user} />
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default Posts
+export default Posts;

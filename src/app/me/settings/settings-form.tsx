@@ -1,77 +1,87 @@
-'use client'
+"use client";
 
-import type { User } from '@/db/schema'
-import type { z } from 'zod'
+import type { User } from "@/db/schema";
+import type { z } from "zod";
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Loader2Icon, UserIcon } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import { useAction } from 'next-safe-action/hooks'
-import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2Icon, UserIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useAction } from "next-safe-action/hooks";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
-import { updateUserSchema } from '@/actions/schema'
-import { updateUserAction } from '@/actions/update-user-action'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Button } from '@/components/ui/button'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
+import { updateUserSchema } from "@/actions/schema";
+import { updateUserAction } from "@/actions/update-user-action";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
 type SettingsFormProps = {
-  user: User
-}
+  user: User;
+};
 
 const SettingsForm = (props: SettingsFormProps) => {
-  const { user } = props
-  const { name, image, bio } = user
-  const router = useRouter()
+  const { user } = props;
+  const { name, image, bio } = user;
+  const router = useRouter();
   const action = useAction(updateUserAction, {
     onSuccess: () => {
-      toast.success('Settings saved')
-      router.refresh()
+      toast.success("Settings saved");
+      router.refresh();
     },
     onError: ({ error }) => {
       toast.error(
         error.serverError ??
           error.validationErrors?.name?.[0] ??
           error.validationErrors?.image?.[0] ??
-          error.validationErrors?.bio?.[0]
-      )
-    }
-  })
+          error.validationErrors?.bio?.[0],
+      );
+    },
+  });
 
   const form = useForm<z.infer<typeof updateUserSchema>>({
     resolver: zodResolver(updateUserSchema),
     defaultValues: {
       name: name,
-      image: image ?? '',
-      bio: bio ?? ''
-    }
-  })
+      image: image ?? "",
+      bio: bio ?? "",
+    },
+  });
 
   const onSubmit = async (values: z.infer<typeof updateUserSchema>) => {
-    await action.executeAsync(values)
-  }
+    await action.executeAsync(values);
+  };
 
   return (
     <Form {...form}>
-      <form className='space-y-4 rounded-lg border p-4' onSubmit={form.handleSubmit(onSubmit)}>
-        <h4 className='mb-6 text-xl font-semibold'>Account</h4>
-        <Avatar className='size-24'>
+      <form
+        className="space-y-4 rounded-lg border p-4"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
+        <h4 className="mb-6 text-xl font-semibold">Account</h4>
+        <Avatar className="size-24">
           <AvatarImage src={image!} width={96} height={96} alt={name} />
           <AvatarFallback>
-            <UserIcon className='size-10' />
+            <UserIcon className="size-10" />
           </AvatarFallback>
         </Avatar>
 
         <FormField
           control={form.control}
-          name='image'
+          name="image"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Image</FormLabel>
               <FormControl>
-                <Input type='url' id='image' placeholder='Image' {...field} />
+                <Input type="url" id="image" placeholder="Image" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -80,12 +90,12 @@ const SettingsForm = (props: SettingsFormProps) => {
 
         <FormField
           control={form.control}
-          name='name'
+          name="name"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input type='text' id='name' placeholder='Name' {...field} />
+                <Input type="text" id="name" placeholder="Name" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -94,25 +104,27 @@ const SettingsForm = (props: SettingsFormProps) => {
 
         <FormField
           control={form.control}
-          name='bio'
+          name="bio"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Bio</FormLabel>
               <FormControl>
-                <Input type='text' id='bio' placeholder='Bio' {...field} />
+                <Input type="text" id="bio" placeholder="Bio" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button type='submit' disabled={action.isExecuting} className='ml-auto'>
-          {action.isExecuting && <Loader2Icon className='mr-2 size-4 animate-spin' />}
+        <Button type="submit" disabled={action.isExecuting} className="ml-auto">
+          {action.isExecuting && (
+            <Loader2Icon className="mr-2 size-4 animate-spin" />
+          )}
           Save
         </Button>
       </form>
     </Form>
-  )
-}
+  );
+};
 
-export default SettingsForm
+export default SettingsForm;

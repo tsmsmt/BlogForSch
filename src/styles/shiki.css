@@ -38,7 +38,7 @@ pre.shiki .highlighted {
 }
 
 .shiki code .diff.remove::before {
-  content: '-';
+  content: "-";
   color: var(--color-diff-remove-symbol);
 }
 
@@ -47,7 +47,7 @@ pre.shiki .highlighted {
 }
 
 .shiki code .diff.add::before {
-  content: '+';
+  content: "+";
   color: var(--color-diff-add-symbol);
 }
 

@@ -1,14 +1,14 @@
-import type { Config } from 'drizzle-kit'
+import type { Config } from "drizzle-kit";
 
-import { env } from './src/env'
+import { env } from "./src/env";
 
 export default {
-  dialect: 'postgresql',
-  schema: './src/db/schema/index.ts',
+  dialect: "postgresql",
+  schema: "./src/db/schema/index.ts",
   dbCredentials: {
-    url: env.DATABASE_URL
+    url: env.DATABASE_URL,
   },
-  out: './src/db/migrations',
+  out: "./src/db/migrations",
   strict: true,
-  verbose: true
-} satisfies Config
+  verbose: true,
+} satisfies Config;

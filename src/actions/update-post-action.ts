@@ -1,13 +1,13 @@
-'use server'
+"use server";
 
-import { and, eq } from 'drizzle-orm'
-import { revalidatePath } from 'next/cache'
+import { and, eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 
-import { db } from '@/db'
-import { posts } from '@/db/schema'
-import { authenticatedActionClient } from '@/lib/safe-action'
+import { db } from "@/db";
+import { posts } from "@/db/schema";
+import { authenticatedActionClient } from "@/lib/safe-action";
 
-import { updatePostSchema } from './schema'
+import { updatePostSchema } from "./schema";
 
 export const updatePostAction = authenticatedActionClient
   .inputSchema(updatePostSchema)
@@ -16,9 +16,9 @@ export const updatePostAction = authenticatedActionClient
       .update(posts)
       .set({
         ...data,
-        updatedAt: new Date()
+        updatedAt: new Date(),
       })
-      .where(and(eq(posts.id, postId), eq(posts.authorId, user.id)))
+      .where(and(eq(posts.id, postId), eq(posts.authorId, user.id)));
 
-    revalidatePath(`/posts/${postId}`)
-  })
+    revalidatePath(`/posts/${postId}`);
+  });

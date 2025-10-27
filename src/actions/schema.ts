@@ -1,18 +1,18 @@
-import { z } from 'zod'
+import { z } from "zod";
 
-import { visibilityEnum } from '@/db/schema'
+import { visibilityEnum } from "@/db/schema";
 
 export const createPostSchema = z.object({
-  title: z.string().min(1).max(100)
-})
+  title: z.string().min(1).max(100),
+});
 
 export const deletePostSchema = z.object({
-  postId: z.string()
-})
+  postId: z.string(),
+});
 
 export const togglePostLikeSchema = z.object({
-  postId: z.string()
-})
+  postId: z.string(),
+});
 
 export const updatePostSchema = z.object({
   postId: z.string(),
@@ -20,11 +20,11 @@ export const updatePostSchema = z.object({
   content: z.string().nullable().optional(),
   description: z.string().nullable().optional(),
   published: z.boolean().optional(),
-  visibility: z.enum(visibilityEnum.enumValues).optional()
-})
+  visibility: z.enum(visibilityEnum.enumValues).optional(),
+});
 
 export const updateUserSchema = z.object({
   name: z.string().min(1).max(100),
   image: z.string(),
-  bio: z.string()
-})
+  bio: z.string(),
+});

@@ -1,7 +1,7 @@
-import { and, desc, eq } from 'drizzle-orm'
+import { and, desc, eq } from "drizzle-orm";
 
-import { db } from '@/db'
-import { posts, users } from '@/db/schema'
+import { db } from "@/db";
+import { posts, users } from "@/db/schema";
 
 export const getUserById = async (id: string) => {
   const result = await db.query.users.findFirst({
@@ -9,32 +9,32 @@ export const getUserById = async (id: string) => {
     columns: {
       name: true,
       image: true,
-      bio: true
+      bio: true,
     },
     with: {
       posts: {
-        where: and(eq(posts.published, true), eq(posts.visibility, 'public')),
+        where: and(eq(posts.published, true), eq(posts.visibility, "public")),
         columns: {
           id: true,
           title: true,
           description: true,
           published: true,
           visibility: true,
-          createdAt: true
+          createdAt: true,
         },
         orderBy: desc(posts.createdAt),
         with: {
           likes: {
             columns: {
-              id: true
-            }
-          }
-        }
-      }
-    }
-  })
+              id: true,
+            },
+          },
+        },
+      },
+    },
+  });
 
   return {
-    user: result
-  }
-}
+    user: result,
+  };
+};

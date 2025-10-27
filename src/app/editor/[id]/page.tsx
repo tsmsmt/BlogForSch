@@ -1,37 +1,37 @@
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
-import { and, eq } from 'drizzle-orm'
-import { notFound, redirect } from 'next/navigation'
+import { and, eq } from "drizzle-orm";
+import { notFound, redirect } from "next/navigation";
 
-import { db } from '@/db'
-import { posts } from '@/db/schema'
-import { getCurrentUser } from '@/lib/auth'
+import { db } from "@/db";
+import { posts } from "@/db/schema";
+import { getCurrentUser } from "@/lib/auth";
 
-import Form from './form'
+import Form from "./form";
 
 export const metadata: Metadata = {
-  title: 'Editor'
-}
+  title: "Editor",
+};
 
-const EditorPage = async (props: PageProps<'/editor/[id]'>) => {
-  const { params } = props
-  const { id } = await params
+const EditorPage = async (props: PageProps<"/editor/[id]">) => {
+  const { params } = props;
+  const { id } = await params;
 
-  const user = await getCurrentUser()
+  const user = await getCurrentUser();
 
   if (!user) {
-    redirect(`/login?redirect=/editor/${id}`)
+    redirect(`/login?redirect=/editor/${id}`);
   }
 
   const post = await db.query.posts.findFirst({
-    where: and(eq(posts.id, id), eq(posts.authorId, user.id))
-  })
+    where: and(eq(posts.id, id), eq(posts.authorId, user.id)),
+  });
 
   if (!post) {
-    notFound()
+    notFound();
   }
 
-  return <Form post={post} />
-}
+  return <Form post={post} />;
+};
 
-export default EditorPage
+export default EditorPage;

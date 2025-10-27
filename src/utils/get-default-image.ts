@@ -1,1 +1,1 @@
-export const getDefaultImage = (id: string) => `https://robohash.org/${id}`
+export const getDefaultImage = (id: string) => `https://robohash.org/${id}`;
